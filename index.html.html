@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackathon Approval 2026</title>
+  <style>
+    :root {
+      --yellow: #FFE600;
+      --yellow-dark: #E6CF00;
+      --dark: #1A1A2E;
+      --dark2: #16213E;
+      --accent: #0f3460;
+      --gray: #F5F5F5;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--gray);
+      color: #333;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(26,26,46,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--yellow);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      gap: 1rem;
+    }
+    nav .brand {
+      color: var(--yellow);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--yellow); }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,230,0,0.3);
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .lang-btn {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.45);
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--yellow);
+      color: var(--dark);
+      border-radius: 20px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(255,230,0,0.08) 0%, transparent 65%);
+    }
+    .hero-content { position: relative; max-width: 720px; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--yellow); }
+    .hero p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: inline-flex;
+      gap: 0.75rem;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+    .hero-cta .btn {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .btn {
+      padding: 0.7rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .btn-primary { background: var(--yellow); color: var(--dark); }
+    .btn-outline { background: transparent; border: 2px solid var(--yellow); color: var(--yellow); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .section-title p {
+      color: #666;
+      font-size: 1rem;
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .accent-bar {
+      width: 48px; height: 4px;
+      background: var(--yellow);
+      border-radius: 2px;
+      margin: 0.8rem auto 0;
+    }
+
+    /* ── OBJETIVO ── */
+    #objetivo { background: #fff; }
+    .obj-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .obj-card {
+      background: #fff;
+      border-top: 4px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .obj-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+    }
+    .obj-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .obj-num {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.8rem;
+    }
+    .obj-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--dark);
+    }
+    .obj-card blockquote {
+      font-style: italic;
+      color: #555;
+      font-size: 0.9rem;
+      border-left: 3px solid var(--yellow);
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+    .obj-card p {
+      color: #666;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: var(--gray);
+      color: var(--dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+    }
+
+    /* ── CRONOGRAMA ── */
+    #cronograma { background: var(--gray); }
+    .timeline {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--yellow), rgba(255,230,0,0.15));
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 2rem;
+      background: #fff;
+      border-top: 3px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tl-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.11);
+    }
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -1.85rem;
+      top: 1.2rem;
+      width: 12px; height: 12px;
+      background: var(--yellow);
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--yellow);
+    }
+    .tl-item.active::before {
+      background: var(--yellow);
+      box-shadow: 0 0 0 4px rgba(255,230,0,0.3);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(255,230,0,0.3); }
+      50%       { box-shadow: 0 0 0 8px rgba(255,230,0,0.1); }
+    }
+    .tl-date {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 0.3rem;
+    }
+    .tl-item.active .tl-date { color: var(--yellow); }
+    .tl-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .tl-item p {
+      font-size: 0.86rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    .tl-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── EQUIPOS ── */
+    #equipos { background: var(--dark2); }
+    #equipos .section-title h2 { color: #fff; }
+    #equipos .section-title p  { color: rgba(255,255,255,0.55); }
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .team-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-top: 3px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.6rem;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .team-card:hover {
+      border-color: var(--yellow);
+      background: rgba(255,230,0,0.05);
+      transform: translateY(-3px);
+    }
+    .team-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(255,230,0,0.12);
+      border: 2px solid var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .team-name {
+      color: var(--yellow);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .team-card h3 {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .team-members { list-style: none; }
+    .team-members li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .team-members li:last-child { border-bottom: none; }
+    .team-members li::before {
+      content: "·";
+      color: var(--yellow);
+      font-weight: 800;
+    }
+
+    /* ── EVALUACIÓN ── */
+    #evaluacion { background: var(--dark2); }
+    #evaluacion .section-title h2 { color: #fff; }
+    #evaluacion .section-title p { color: rgba(255,255,255,0.55); }
+    .eval-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .eval-label.must { color: #f87171; }
+    .eval-label.score { color: #34d399; }
+    .eval-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .eval-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .eval-card:hover {
+      border-color: var(--yellow);
+      background: rgba(255,230,0,0.05);
+    }
+    .eval-card .eval-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 0.9rem;
+    }
+    .must .eval-num { background: rgba(248,113,113,0.15); color: #f87171; border: 1.5px solid #f87171; }
+    .score-card .eval-num { background: rgba(52,211,153,0.15); color: #34d399; border: 1.5px solid #34d399; }
+    .eval-card h3 {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .eval-card p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.83rem;
+      line-height: 1.6;
+    }
+    .eval-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 0.5rem 0 2rem;
+    }
+
+    /* ── PRESENTACIÓN ── */
+    #presentacion { background: #fff; }
+    .slides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .slide-card {
+      background: #fff;
+      border-top: 3px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .slide-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .slide-num {
+      width: 36px; height: 36px;
+      background: var(--yellow);
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .slide-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .slide-card .slide-question {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #888;
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+    .slide-card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .slide-limit {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: #888;
+      font-size: 0.85rem;
+    }
+    .slide-limit strong { color: var(--dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+    }
+    footer span { color: var(--yellow); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .obj-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .eval-grid, .slides-grid, .teams-grid { grid-template-columns: 1fr; }
+      .timeline { padding-left: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">⚡ Hackathon Approval 2026</div>
+  <div class="nav-right">
+    <ul>
+      <li><a href="#objetivo" data-i18n="nav.objetivo">Objetivo</a></li>
+      <li><a href="#cronograma" data-i18n="nav.cronograma">Cronograma</a></li>
+      <li><a href="#equipos" data-i18n="nav.equipos">Equipos</a></li>
+      <li><a href="#evaluacion" data-i18n="nav.evaluacion">Evaluación</a></li>
+      <li><a href="#presentacion" data-i18n="nav.presentacion">Presentación</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">FP Fintech · Approval · 2026</div>
+    <h1>Hackathon <span>Gen AI</span><br>Approval</h1>
+    <p data-i18n="hero.desc">Sumate a la hackathon: metete de lleno en IA generativa, proponé ideas audaces y construí en equipo prototipos reales que llevemos a producción para frenar el fraude a escala.</p>
+    <div class="hero-cta">
+      <a href="#objetivo" class="btn btn-primary" data-i18n="hero.btn.objetivos">Ver Objetivos</a>
+      <a href="#evaluacion" class="btn btn-primary" data-i18n="hero.btn.evaluacion">Criterios de Evaluación</a>
+      <a href="#cronograma" class="btn btn-primary" data-i18n="hero.btn.cronograma">Ver Cronograma</a>
+      <a href="#equipos" class="btn btn-primary" data-i18n="hero.btn.equipos">Ver Equipos</a>
+    </div>
+  </div>
+</section>
+
+<!-- OBJETIVO -->
+<section id="objetivo">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="obj.title">🎯 Objetivos</h2>
+      <p data-i18n="obj.subtitle">Tres pilares que guían el espíritu de la hackathon y definen qué esperamos de cada equipo.</p>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="obj-grid">
+
+      <div class="obj-card">
+        <div class="obj-icon">⚡</div>
+        <div class="obj-num" data-i18n="obj1.num">OBJETIVO 01</div>
+        <h3 data-i18n="obj1.h3">Acelerar la adopción de Gen AI en FP Fintech</h3>
+        <blockquote data-i18n="obj1.quote">"Llevá las herramientas de IA de MELI al centro del trabajo diario."</blockquote>
+        <p data-i18n="obj1.desc">La iniciativa pone a Claude Code, Fury y el ecosistema Gen AI como tecnologías fundacionales para transformar las operaciones cotidianas dentro de FP Fintech.</p>
+        <div class="tag-row">
+          <span class="tag">Claude Code</span>
+          <span class="tag">Fury</span>
+          <span class="tag">Gen AI</span>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-icon">📊</div>
+        <div class="obj-num" data-i18n="obj2.num">OBJETIVO 02</div>
+        <h3 data-i18n="obj2.h3">Desarrollar soluciones con impacto de negocio</h3>
+        <blockquote data-i18n="obj2.quote">"Las ideas deben traducirse en valor real y medible."</blockquote>
+        <p data-i18n="obj2.desc">Las soluciones deben enfocarse en mejorar la aprobación bancaria y generar impacto en métricas de negocio medibles mes a mes, optimizando nuestros tiempos en un contexto de muchas tareas.</p>
+        <div class="tag-row">
+          <span class="tag">Scalability</span>
+          <span class="tag">Metrics</span>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-icon">🏗️</div>
+        <div class="obj-num" data-i18n="obj3.num">OBJETIVO 03</div>
+        <h3 data-i18n="obj3.h3">Entregar MVPs tangibles y listos para producción</h3>
+        <blockquote data-i18n="obj3.quote">"No alcanza con la idea: hay que construirla."</blockquote>
+        <p data-i18n="obj3.desc">Los equipos deben producir prototipos funcionales o MVPs con roadmaps claros para evolución y despliegue en producción.</p>
+        <div class="tag-row">
+          <span class="tag">MVP</span>
+          <span class="tag">Production</span>
+          <span class="tag">Roadmap</span>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-icon">🎯</div>
+        <div class="obj-num" data-i18n="obj4.num">PUNTO CLAVE 04</div>
+        <h3 data-i18n="obj4.h3">Máxima prioridad del track</h3>
+        <blockquote data-i18n="obj4.quote">"Este track es prioridad #1 y requiere el tiempo definido en la semana para ejecutarse correctamente."</blockquote>
+        <p data-i18n="obj4.desc">Para asegurar resultados, este track debe tener foco y dedicación efectiva durante la semana asignada, evitando competir con otras urgencias. La calidad de la entrega depende directamente de respetar el tiempo planificado y sostener el compromiso del equipo de punta a punta.</p>
+        <div class="tag-row">
+          <span class="tag">Priority Focus</span>
+          <span class="tag">Time</span>
+          <span class="tag">Commitment</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CRONOGRAMA -->
+<section id="cronograma">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="cron.title">📅 Cronograma</h2>
+      <p data-i18n="cron.subtitle">Las fechas clave del desafío, desde el kick-off hasta la ceremonia de cierre.</p>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item active">
+        <div class="tl-badge" data-i18n="cron.badge">EN CURSO</div>
+        <div class="tl-date" data-i18n="cron.tl1.date">20 de marzo, 2026</div>
+        <h3 data-i18n="cron.tl1.h3">🚀 Kick-off</h3>
+        <p data-i18n="cron.tl1.desc">Presentación de los objetivos de la hackathon y conformación de equipos. ¡Arranca oficialmente el desafío!</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <h3 data-i18n="cron.tl2.h3">⚙️ Set up</h3>
+        <p data-i18n="cron.tl2.desc">Realizar todas las configuraciones para poder usar Claude y unir con Slack, BQ y otras herramientas que serán de utilidad en la Hackathon.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <h3 data-i18n="cron.tl3.h3">🤝 Check ideas</h3>
+        <p data-i18n="cron.tl3.desc">Presentación de ideas a los sponsors y debatir si van por el camino correcto o hay que hacer modificaciones.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <h3 data-i18n="cron.tl4.h3">⚙️ Hackathon</h3>
+        <p data-i18n="cron.tl4.desc">¡A meterle! XX días intensivos para construir el MVP o prototipo. Foco total en ejecución, creatividad e impacto.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <h3 data-i18n="cron.tl5.h3">🎤 Presentación de Resultados</h3>
+        <p data-i18n="cron.tl5.desc">Los equipos nos presentan sus soluciones con un formato de máximo 5 slides: problema, solución y roadmap.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <h3 data-i18n="cron.tl6.h3">🏆 Feedback de Cierre</h3>
+        <p data-i18n="cron.tl6.desc">Hacemos un cierre entre todos para ver que nos llevamos de la hackathon.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPOS -->
+<section id="equipos">
+  <div class="container">
+    <div class="section-title">
+      <h2 style="color:#fff;" data-i18n="eq.title">👥 Equipos</h2>
+      <p style="color:rgba(255,255,255,0.55);" data-i18n="eq.subtitle">Los equipos participantes de la hackathon. Integrantes a confirmar.</p>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="teams-grid">
+
+      <div class="team-card">
+        <div class="team-avatar">🤖</div>
+        <div class="team-name" data-i18n="eq.team1.name">Equipo 01</div>
+        <h3 data-i18n="eq.tbd">A definir</h3>
+        <ul class="team-members">
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+        </ul>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">⚡</div>
+        <div class="team-name" data-i18n="eq.team2.name">Equipo 02</div>
+        <h3 data-i18n="eq.tbd">A definir</h3>
+        <ul class="team-members">
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+        </ul>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">🚀</div>
+        <div class="team-name" data-i18n="eq.team3.name">Equipo 03</div>
+        <h3 data-i18n="eq.tbd">A definir</h3>
+        <ul class="team-members">
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+          <li data-i18n="eq.tbd">A definir</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EVALUACIÓN -->
+<section id="evaluacion">
+  <div class="container">
+    <div class="section-title">
+      <h2 style="color:#fff;" data-i18n="eval.title">🏆 Evaluación</h2>
+      <p style="color:rgba(255,255,255,0.55);" data-i18n="eval.subtitle">4 ejes de evaluación: 2 requisitos obligatorios y 2 criterios de puntuación adicionales.</p>
+      <div class="accent-bar"></div>
+    </div>
+
+    <div class="eval-label must" data-i18n="eval.must.label">⛔ Requisitos Obligatorios (Must-Have)</div>
+    <div class="eval-grid">
+
+      <div class="eval-card must">
+        <div class="eval-num">1</div>
+        <h3 data-i18n="eval.e1.h3">Uso de herramientas de IA</h3>
+        <p data-i18n="eval.e1.desc">Integración efectiva de Claude Code, Fury u otras herramientas del ecosistema. Profundidad de la implementación real y valor agregado justificado.</p>
+      </div>
+
+      <div class="eval-card must">
+        <div class="eval-num">2</div>
+        <h3 data-i18n="eval.e2.h3">Presentación del entregable</h3>
+        <p data-i18n="eval.e2.desc">Existencia de MVP o prototipo funcional. Claridad en la narrativa problema-solución-impacto. Capacidad de demo tangible.</p>
+      </div>
+
+    </div>
+
+    <hr class="eval-divider" />
+
+    <div class="eval-label score" data-i18n="eval.score.label">✅ Criterios de Puntuación</div>
+    <div class="eval-grid">
+
+      <div class="eval-card score-card">
+        <div class="eval-num">3</div>
+        <h3 data-i18n="eval.e3.h3">Impacto generado</h3>
+        <p data-i18n="eval.e3.desc">Magnitud del impacto estimado. Claridad de la métrica (mensual/anual) y realismo de los supuestos utilizados.</p>
+      </div>
+
+      <div class="eval-card score-card">
+        <div class="eval-num">4</div>
+        <h3 data-i18n="eval.e4.h3">Innovación</h3>
+        <p data-i18n="eval.e4.desc">Diferenciación respecto a soluciones actuales. Aplicación creativa de la IA y enfoque disruptivo vs. incremental.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRESENTACIÓN -->
+<section id="presentacion">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="pres.title">🎤 Presentación</h2>
+      <p data-i18n="pres.subtitle">Formato simple y directo: máximo 5 slides para comunicar el valor de tu solución.</p>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="slides-grid">
+
+      <div class="slide-card">
+        <div class="slide-num">1</div>
+        <h3 data-i18n="pres.s1.h3">Problema</h3>
+        <div class="slide-question" data-i18n="pres.s1.q">¿Qué problema identificaron?</div>
+        <p data-i18n="pres.s1.desc">Describí el pain point u oportunidad que el equipo decidió abordar, utilizando datos concretos y contexto relevante para dimensionar el problema.</p>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">2</div>
+        <h3 data-i18n="pres.s2.h3">Solución</h3>
+        <div class="slide-question" data-i18n="pres.s2.q">¿Cómo lo resolvieron?</div>
+        <p data-i18n="pres.s2.desc">Presentá el MVP o prototipo construido y su propuesta de valor para el negocio. Mostrá el demo y explicá cómo la IA es el núcleo de la solución.</p>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-num">3</div>
+        <h3 data-i18n="pres.s3.h3">Roadmap</h3>
+        <div class="slide-question" data-i18n="pres.s3.q">¿Cuáles son los próximos pasos?</div>
+        <p data-i18n="pres.s3.desc">Detallá las siguientes iteraciones, dependencias técnicas y/u organizacionales, y la visión de cómo esta solución llega a producción y escala.</p>
+      </div>
+
+    </div>
+    <p class="slide-limit"><strong data-i18n="pres.limit">Máximo 5 slides.</strong> <span data-i18n="pres.limit2">Claridad y concisión por encima de todo.</span></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Hackathon Approval 2026 &nbsp;·&nbsp; <span>⚡ Powered by Gen AI</span></p>
+</footer>
+
+<script>
+  const translations = {
+    es: {
+      "nav.objetivo":       "Objetivo",
+      "nav.cronograma":     "Cronograma",
+      "nav.equipos":        "Equipos",
+      "nav.evaluacion":     "Evaluación",
+      "nav.presentacion":   "Presentación",
+
+      "hero.desc":          "Sumate a la hackathon: metete de lleno en IA generativa, proponé ideas audaces y construí en equipo prototipos reales que llevemos a producción para frenar el fraude a escala.",
+      "hero.btn.objetivos": "Ver Objetivos",
+      "hero.btn.evaluacion":"Criterios de Evaluación",
+      "hero.btn.cronograma":"Ver Cronograma",
+      "hero.btn.equipos":   "Ver Equipos",
+
+      "obj.title":    "🎯 Objetivos",
+      "obj.subtitle": "Tres pilares que guían el espíritu de la hackathon y definen qué esperamos de cada equipo.",
+      "obj1.num":     "OBJETIVO 01",
+      "obj1.h3":      "Acelerar la adopción de Gen AI en FP Fintech",
+      "obj1.quote":   '"Llevá las herramientas de IA de MELI al centro del trabajo diario."',
+      "obj1.desc":    "La iniciativa pone a Claude Code, Fury y el ecosistema Gen AI como tecnologías fundacionales para transformar las operaciones cotidianas dentro de FP Fintech.",
+      "obj2.num":     "OBJETIVO 02",
+      "obj2.h3":      "Desarrollar soluciones con impacto de negocio",
+      "obj2.quote":   '"Las ideas deben traducirse en valor real y medible."',
+      "obj2.desc":    "Las soluciones deben enfocarse en mejorar la aprobación bancaria y generar impacto en métricas de negocio medibles mes a mes, optimizando nuestros tiempos en un contexto de muchas tareas.",
+      "obj3.num":     "OBJETIVO 03",
+      "obj3.h3":      "Entregar MVPs tangibles y listos para producción",
+      "obj3.quote":   '"No alcanza con la idea: hay que construirla."',
+      "obj3.desc":    "Los equipos deben producir prototipos funcionales o MVPs con roadmaps claros para evolución y despliegue en producción.",
+      "obj4.num":     "PUNTO CLAVE 04",
+      "obj4.h3":      "Máxima prioridad del track",
+      "obj4.quote":   '"Este track es prioridad #1 y requiere el tiempo definido en la semana para ejecutarse correctamente."',
+      "obj4.desc":    "Para asegurar resultados, este track debe tener foco y dedicación efectiva durante la semana asignada, evitando competir con otras urgencias. La calidad de la entrega depende directamente de respetar el tiempo planificado y sostener el compromiso del equipo de punta a punta.",
+
+      "cron.title":    "📅 Cronograma",
+      "cron.subtitle": "Las fechas clave del desafío, desde el kick-off hasta la ceremonia de cierre.",
+      "cron.badge":    "EN CURSO",
+      "cron.tbd":      "A definir fecha",
+      "cron.tl1.date": "20 de marzo, 2026",
+      "cron.tl1.h3":   "🚀 Kick-off",
+      "cron.tl1.desc": "Presentación de los objetivos de la hackathon y conformación de equipos. ¡Arranca oficialmente el desafío!",
+      "cron.tl2.h3":   "⚙️ Set up",
+      "cron.tl2.desc": "Realizar todas las configuraciones para poder usar Claude y unir con Slack, BQ y otras herramientas que serán de utilidad en la Hackathon.",
+      "cron.tl3.h3":   "🤝 Check ideas",
+      "cron.tl3.desc": "Presentación de ideas a los sponsors y debatir si van por el camino correcto o hay que hacer modificaciones.",
+      "cron.tl4.h3":   "⚙️ Hackathon",
+      "cron.tl4.desc": "¡A meterle! XX días intensivos para construir el MVP o prototipo. Foco total en ejecución, creatividad e impacto.",
+      "cron.tl5.h3":   "🎤 Presentación de Resultados",
+      "cron.tl5.desc": "Los equipos nos presentan sus soluciones con un formato de máximo 5 slides: problema, solución y roadmap.",
+      "cron.tl6.h3":   "🏆 Feedback de Cierre",
+      "cron.tl6.desc": "Hacemos un cierre entre todos para ver que nos llevamos de la hackathon.",
+
+      "eq.title":      "👥 Equipos",
+      "eq.subtitle":   "Los equipos participantes de la hackathon. Integrantes a confirmar.",
+      "eq.team1.name": "Equipo 01",
+      "eq.team2.name": "Equipo 02",
+      "eq.team3.name": "Equipo 03",
+      "eq.tbd":        "A definir",
+
+      "eval.title":       "🏆 Evaluación",
+      "eval.subtitle":    "4 ejes de evaluación: 2 requisitos obligatorios y 2 criterios de puntuación adicionales.",
+      "eval.must.label":  "⛔ Requisitos Obligatorios (Must-Have)",
+      "eval.e1.h3":       "Uso de herramientas de IA",
+      "eval.e1.desc":     "Integración efectiva de Claude Code, Fury u otras herramientas del ecosistema. Profundidad de la implementación real y valor agregado justificado.",
+      "eval.e2.h3":       "Presentación del entregable",
+      "eval.e2.desc":     "Existencia de MVP o prototipo funcional. Claridad en la narrativa problema-solución-impacto. Capacidad de demo tangible.",
+      "eval.score.label": "✅ Criterios de Puntuación",
+      "eval.e3.h3":       "Impacto generado",
+      "eval.e3.desc":     "Magnitud del impacto estimado. Claridad de la métrica (mensual/anual) y realismo de los supuestos utilizados.",
+      "eval.e4.h3":       "Innovación",
+      "eval.e4.desc":     "Diferenciación respecto a soluciones actuales. Aplicación creativa de la IA y enfoque disruptivo vs. incremental.",
+
+      "pres.title":   "🎤 Presentación",
+      "pres.subtitle":"Formato simple y directo: máximo 5 slides para comunicar el valor de tu solución.",
+      "pres.s1.h3":   "Problema",
+      "pres.s1.q":    "¿Qué problema identificaron?",
+      "pres.s1.desc": "Describí el pain point u oportunidad que el equipo decidió abordar, utilizando datos concretos y contexto relevante para dimensionar el problema.",
+      "pres.s2.h3":   "Solución",
+      "pres.s2.q":    "¿Cómo lo resolvieron?",
+      "pres.s2.desc": "Presentá el MVP o prototipo construido y su propuesta de valor para el negocio. Mostrá el demo y explicá cómo la IA es el núcleo de la solución.",
+      "pres.s3.h3":   "Roadmap",
+      "pres.s3.q":    "¿Cuáles son los próximos pasos?",
+      "pres.s3.desc": "Detallá las siguientes iteraciones, dependencias técnicas y/u organizacionales, y la visión de cómo esta solución llega a producción y escala.",
+      "pres.limit":   "Máximo 5 slides.",
+      "pres.limit2":  "Claridad y concisión por encima de todo.",
+    },
+
+    pt: {
+      "nav.objetivo":       "Objetivo",
+      "nav.cronograma":     "Cronograma",
+      "nav.equipos":        "Equipes",
+      "nav.evaluacion":     "Avaliação",
+      "nav.presentacion":   "Apresentação",
+
+      "hero.desc":          "Participe da hackathon: mergulhe de cabeça em IA generativa, proponha ideias ousadas e construa em equipe protótipos reais que levemos para produção para combater fraudes em escala.",
+      "hero.btn.objetivos": "Ver Objetivos",
+      "hero.btn.evaluacion":"Critérios de Avaliação",
+      "hero.btn.cronograma":"Ver Cronograma",
+      "hero.btn.equipos":   "Ver Equipes",
+
+      "obj.title":    "🎯 Objetivos",
+      "obj.subtitle": "Três pilares que guiam o espírito da hackathon e definem o que esperamos de cada equipe.",
+      "obj1.num":     "OBJETIVO 01",
+      "obj1.h3":      "Acelerar a adoção de Gen AI na FP Fintech",
+      "obj1.quote":   '"Leve as ferramentas de IA da MELI para o centro do trabalho diário."',
+      "obj1.desc":    "A iniciativa coloca Claude Code, Fury e o ecossistema Gen AI como tecnologias fundamentais para transformar as operações cotidianas dentro da FP Fintech.",
+      "obj2.num":     "OBJETIVO 02",
+      "obj2.h3":      "Desenvolver soluções com impacto no negócio",
+      "obj2.quote":   '"As ideias devem se traduzir em valor real e mensurável."',
+      "obj2.desc":    "As soluções devem focar em melhorar a aprovação bancária e gerar impacto em métricas de negócio mensuráveis mês a mês, otimizando nosso tempo em um contexto de muitas tarefas.",
+      "obj3.num":     "OBJETIVO 03",
+      "obj3.h3":      "Entregar MVPs tangíveis e prontos para produção",
+      "obj3.quote":   '"A ideia não basta: é preciso construí-la."',
+      "obj3.desc":    "As equipes devem produzir protótipos funcionais ou MVPs com roadmaps claros para evolução e deploy em produção.",
+      "obj4.num":     "PONTO CHAVE 04",
+      "obj4.h3":      "Máxima prioridade do track",
+      "obj4.quote":   '"Este track é prioridade #1 e requer o tempo definido na semana para ser executado corretamente."',
+      "obj4.desc":    "Para garantir resultados, este track deve ter foco e dedicação efetiva durante a semana atribuída, evitando competir com outras urgências. A qualidade da entrega depende diretamente de respeitar o tempo planejado e manter o comprometimento da equipe do início ao fim.",
+
+      "cron.title":    "📅 Cronograma",
+      "cron.subtitle": "As datas-chave do desafio, desde o kick-off até a cerimônia de encerramento.",
+      "cron.badge":    "EM ANDAMENTO",
+      "cron.tbd":      "Data a definir",
+      "cron.tl1.date": "20 de março, 2026",
+      "cron.tl1.h3":   "🚀 Kick-off",
+      "cron.tl1.desc": "Apresentação dos objetivos da hackathon e formação de equipes. O desafio começa oficialmente!",
+      "cron.tl2.h3":   "⚙️ Set up",
+      "cron.tl2.desc": "Realizar todas as configurações para poder usar o Claude e integrar com Slack, BQ e outras ferramentas que serão úteis na Hackathon.",
+      "cron.tl3.h3":   "🤝 Check ideas",
+      "cron.tl3.desc": "Apresentação de ideias aos sponsors e debate sobre se estão no caminho certo ou se é preciso fazer modificações.",
+      "cron.tl4.h3":   "⚙️ Hackathon",
+      "cron.tl4.desc": "Vamos lá! XX dias intensivos para construir o MVP ou protótipo. Foco total em execução, criatividade e impacto.",
+      "cron.tl5.h3":   "🎤 Apresentação de Resultados",
+      "cron.tl5.desc": "As equipes nos apresentam suas soluções com um formato de máximo 5 slides: problema, solução e roadmap.",
+      "cron.tl6.h3":   "🏆 Feedback de Encerramento",
+      "cron.tl6.desc": "Fazemos um encerramento entre todos para ver o que levamos da hackathon.",
+
+      "eq.title":      "👥 Equipes",
+      "eq.subtitle":   "As equipes participantes da hackathon. Integrantes a confirmar.",
+      "eq.team1.name": "Equipe 01",
+      "eq.team2.name": "Equipe 02",
+      "eq.team3.name": "Equipe 03",
+      "eq.tbd":        "A definir",
+
+      "eval.title":       "🏆 Avaliação",
+      "eval.subtitle":    "4 eixos de avaliação: 2 requisitos obrigatórios e 2 critérios de pontuação adicionais.",
+      "eval.must.label":  "⛔ Requisitos Obrigatórios (Must-Have)",
+      "eval.e1.h3":       "Uso de ferramentas de IA",
+      "eval.e1.desc":     "Integração efetiva do Claude Code, Fury ou outras ferramentas do ecossistema. Profundidade da implementação real e valor agregado justificado.",
+      "eval.e2.h3":       "Apresentação do entregável",
+      "eval.e2.desc":     "Existência de MVP ou protótipo funcional. Clareza na narrativa problema-solução-impacto. Capacidade de demo tangível.",
+      "eval.score.label": "✅ Critérios de Pontuação",
+      "eval.e3.h3":       "Impacto gerado",
+      "eval.e3.desc":     "Magnitude do impacto estimado. Clareza da métrica (mensal/anual) e realismo dos pressupostos utilizados.",
+      "eval.e4.h3":       "Inovação",
+      "eval.e4.desc":     "Diferenciação em relação às soluções atuais. Aplicação criativa da IA e abordagem disruptiva vs. incremental.",
+
+      "pres.title":   "🎤 Apresentação",
+      "pres.subtitle":"Formato simples e direto: máximo 5 slides para comunicar o valor da sua solução.",
+      "pres.s1.h3":   "Problema",
+      "pres.s1.q":    "Qual problema identificaram?",
+      "pres.s1.desc": "Descreva o pain point ou oportunidade que a equipe decidiu abordar, utilizando dados concretos e contexto relevante para dimensionar o problema.",
+      "pres.s2.h3":   "Solução",
+      "pres.s2.q":    "Como resolveram?",
+      "pres.s2.desc": "Apresente o MVP ou protótipo construído e sua proposta de valor para o negócio. Mostre o demo e explique como a IA é o núcleo da solução.",
+      "pres.s3.h3":   "Roadmap",
+      "pres.s3.q":    "Quais são os próximos passos?",
+      "pres.s3.desc": "Detalhe as próximas iterações, dependências técnicas e/ou organizacionais, e a visão de como essa solução chega à produção e escala.",
+      "pres.limit":   "Máximo 5 slides.",
+      "pres.limit2":  "Clareza e concisão acima de tudo.",
+    }
+  };
+
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    const t = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+  }
+</script>
+
+</body>
+</html>
