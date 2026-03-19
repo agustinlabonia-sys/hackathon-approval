@@ -453,6 +453,15 @@
       border-top: 1px solid rgba(255,255,255,0.08);
       margin: 0.5rem 0 2rem;
     }
+    .eval-center-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+    .eval-center-row .eval-card {
+      max-width: 420px;
+      width: 100%;
+    }
 
     /* ── PRESENTACIÓN ── */
     #presentacion { background: #fff; }
@@ -509,6 +518,80 @@
     }
     .slide-limit strong { color: var(--dark); }
 
+    /* ── PREMIO ── */
+    #premio {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a1040 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #premio::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(255,230,0,0.07) 0%, transparent 65%);
+    }
+    #premio .container { position: relative; }
+    #premio .section-title h2 { color: #fff; }
+    #premio .section-title p { color: rgba(255,255,255,0.55); }
+    .premio-card {
+      max-width: 620px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,230,0,0.25);
+      border-top: 4px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .premio-card:hover {
+      border-color: var(--yellow);
+      background: rgba(255,230,0,0.06);
+    }
+    .premio-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.2rem;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .premio-card h3 {
+      color: var(--yellow);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .premio-card p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .premio-mystery {
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .mystery-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--yellow);
+      opacity: 0.3;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    .mystery-dot:nth-child(2) { animation-delay: 0.3s; }
+    .mystery-dot:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 1; }
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--dark);
@@ -527,6 +610,7 @@
       nav ul { display: none; }
       .eval-grid, .slides-grid, .teams-grid { grid-template-columns: 1fr; }
       .timeline { padding-left: 1.5rem; }
+      .hero-cta { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -542,6 +626,7 @@
       <li><a href="#equipos" data-i18n="nav.equipos">Equipos</a></li>
       <li><a href="#evaluacion" data-i18n="nav.evaluacion">Evaluación</a></li>
       <li><a href="#presentacion" data-i18n="nav.presentacion">Presentación</a></li>
+      <li><a href="#premio" data-i18n="nav.premio">Premio</a></li>
     </ul>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('es')">ES</button>
@@ -648,19 +733,25 @@
       </div>
 
       <div class="tl-item">
-        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <div class="tl-date" data-i18n="cron.tl2.date">Semana del 23 de marzo, 2026</div>
         <h3 data-i18n="cron.tl2.h3">⚙️ Set up</h3>
         <p data-i18n="cron.tl2.desc">Realizar todas las configuraciones para poder usar Claude y unir con Slack, BQ y otras herramientas que serán de utilidad en la Hackathon.</p>
       </div>
 
       <div class="tl-item">
-        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
-        <h3 data-i18n="cron.tl3.h3">🤝 Check ideas</h3>
+        <div class="tl-date" data-i18n="cron.tleq.date">Semana del 23 de marzo, 2026</div>
+        <h3 data-i18n="cron.tleq.h3">👥 Definición de equipos</h3>
+        <p data-i18n="cron.tleq.desc">Se definirán los equipos junto con la persona que los ayudará a guiarlos en las ideas que piensen para llevar adelante. Se armará un grupo de Slack cuando esté definido. ¡Súper importante pensar un nombre para el equipo!</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="cron.tl3.date">Semana del 30 de marzo y 6 de abril</div>
+        <h3 data-i18n="cron.tl3.h3">🧠 Brainstorming</h3>
         <p data-i18n="cron.tl3.desc">Presentación de ideas a los sponsors y debatir si van por el camino correcto o hay que hacer modificaciones.</p>
       </div>
 
       <div class="tl-item">
-        <div class="tl-date" data-i18n="cron.tbd">A definir fecha</div>
+        <div class="tl-date" data-i18n="cron.tl4.date">25 de Marzo se confirma la fecha de inicio</div>
         <h3 data-i18n="cron.tl4.h3">⚙️ Hackathon</h3>
         <p data-i18n="cron.tl4.desc">¡A meterle! XX días intensivos para construir el MVP o prototipo. Foco total en ejecución, creatividad e impacto.</p>
       </div>
@@ -736,7 +827,7 @@
   <div class="container">
     <div class="section-title">
       <h2 style="color:#fff;" data-i18n="eval.title">🏆 Evaluación</h2>
-      <p style="color:rgba(255,255,255,0.55);" data-i18n="eval.subtitle">4 ejes de evaluación: 2 requisitos obligatorios y 2 criterios de puntuación adicionales.</p>
+      <p style="color:rgba(255,255,255,0.55);" data-i18n="eval.subtitle">5 ejes de evaluación: 2 requisitos obligatorios y 3 criterios de puntuación adicionales.</p>
       <div class="accent-bar"></div>
     </div>
 
@@ -775,6 +866,15 @@
       </div>
 
     </div>
+
+    <div class="eval-center-row">
+      <div class="eval-card score-card">
+        <div class="eval-num">5</div>
+        <h3 data-i18n="eval.e5.h3">Voto de los participantes</h3>
+        <p data-i18n="eval.e5.desc">Entre ustedes van a elegir cuál les pareció la mejor presentación e idea que se desarrolló, y sumará en la decisión final.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -814,6 +914,27 @@
   </div>
 </section>
 
+<!-- PREMIO AL GANADOR -->
+<section id="premio">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="premio.title">🏅 Premio al Ganador</h2>
+      <p data-i18n="premio.subtitle" style="color:rgba(255,255,255,0.55);">Algo grande espera al equipo que se destaque. Los detalles… aún están bajo llave.</p>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="premio-card">
+      <span class="premio-icon">🔒</span>
+      <h3 data-i18n="premio.card.h3">A definir</h3>
+      <p data-i18n="premio.card.desc">El premio está siendo preparado con cuidado. Solo podemos decir que valdrá la pena cada línea de código, cada idea y cada hora invertida. El equipo ganador se llevará algo que va más allá de lo esperado.</p>
+      <div class="premio-mystery">
+        <div class="mystery-dot"></div>
+        <div class="mystery-dot"></div>
+        <div class="mystery-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <p>Hackathon Approval 2026 &nbsp;·&nbsp; <span>⚡ Powered by Gen AI</span></p>
@@ -827,6 +948,7 @@
       "nav.equipos":        "Equipos",
       "nav.evaluacion":     "Evaluación",
       "nav.presentacion":   "Presentación",
+      "nav.premio":         "Premio",
 
       "hero.desc":          "Sumate a la hackathon: metete de lleno en IA generativa, proponé ideas audaces y construí en equipo prototipos reales que llevemos a producción para frenar el fraude a escala.",
       "hero.btn.objetivos": "Ver Objetivos",
@@ -860,10 +982,16 @@
       "cron.tl1.date": "20 de marzo, 2026",
       "cron.tl1.h3":   "🚀 Kick-off",
       "cron.tl1.desc": "Presentación de los objetivos de la hackathon y conformación de equipos. ¡Arranca oficialmente el desafío!",
+      "cron.tl2.date": "Semana del 23 de marzo, 2026",
       "cron.tl2.h3":   "⚙️ Set up",
       "cron.tl2.desc": "Realizar todas las configuraciones para poder usar Claude y unir con Slack, BQ y otras herramientas que serán de utilidad en la Hackathon.",
-      "cron.tl3.h3":   "🤝 Check ideas",
+      "cron.tleq.date":"Semana del 23 de marzo, 2026",
+      "cron.tleq.h3":  "👥 Definición de equipos",
+      "cron.tleq.desc":"Se definirán los equipos junto con la persona que los ayudará a guiarlos en las ideas que piensen para llevar adelante. Se armará un grupo de Slack cuando esté definido. ¡Súper importante pensar un nombre para el equipo!",
+      "cron.tl3.date": "Semana del 30 de marzo y 6 de abril",
+      "cron.tl3.h3":   "🧠 Brainstorming",
       "cron.tl3.desc": "Presentación de ideas a los sponsors y debatir si van por el camino correcto o hay que hacer modificaciones.",
+      "cron.tl4.date": "25 de Marzo se confirma la fecha de inicio",
       "cron.tl4.h3":   "⚙️ Hackathon",
       "cron.tl4.desc": "¡A meterle! XX días intensivos para construir el MVP o prototipo. Foco total en ejecución, creatividad e impacto.",
       "cron.tl5.h3":   "🎤 Presentación de Resultados",
@@ -879,7 +1007,7 @@
       "eq.tbd":        "A definir",
 
       "eval.title":       "🏆 Evaluación",
-      "eval.subtitle":    "4 ejes de evaluación: 2 requisitos obligatorios y 2 criterios de puntuación adicionales.",
+      "eval.subtitle":    "5 ejes de evaluación: 2 requisitos obligatorios y 3 criterios de puntuación adicionales.",
       "eval.must.label":  "⛔ Requisitos Obligatorios (Must-Have)",
       "eval.e1.h3":       "Uso de herramientas de IA",
       "eval.e1.desc":     "Integración efectiva de Claude Code, Fury u otras herramientas del ecosistema. Profundidad de la implementación real y valor agregado justificado.",
@@ -890,6 +1018,8 @@
       "eval.e3.desc":     "Magnitud del impacto estimado. Claridad de la métrica (mensual/anual) y realismo de los supuestos utilizados.",
       "eval.e4.h3":       "Innovación",
       "eval.e4.desc":     "Diferenciación respecto a soluciones actuales. Aplicación creativa de la IA y enfoque disruptivo vs. incremental.",
+      "eval.e5.h3":       "Voto de los participantes",
+      "eval.e5.desc":     "Entre ustedes van a elegir cuál les pareció la mejor presentación e idea que se desarrolló, y sumará en la decisión final.",
 
       "pres.title":   "🎤 Presentación",
       "pres.subtitle":"Formato simple y directo: máximo 5 slides para comunicar el valor de tu solución.",
@@ -904,6 +1034,11 @@
       "pres.s3.desc": "Detallá las siguientes iteraciones, dependencias técnicas y/u organizacionales, y la visión de cómo esta solución llega a producción y escala.",
       "pres.limit":   "Máximo 5 slides.",
       "pres.limit2":  "Claridad y concisión por encima de todo.",
+
+      "premio.title":     "🏅 Premio al Ganador",
+      "premio.subtitle":  "Algo grande espera al equipo que se destaque. Los detalles… aún están bajo llave.",
+      "premio.card.h3":   "A definir",
+      "premio.card.desc": "El premio está siendo preparado con cuidado. Solo podemos decir que valdrá la pena cada línea de código, cada idea y cada hora invertida. El equipo ganador se llevará algo que va más allá de lo esperado.",
     },
 
     pt: {
@@ -912,6 +1047,7 @@
       "nav.equipos":        "Equipes",
       "nav.evaluacion":     "Avaliação",
       "nav.presentacion":   "Apresentação",
+      "nav.premio":         "Prêmio",
 
       "hero.desc":          "Participe da hackathon: mergulhe de cabeça em IA generativa, proponha ideias ousadas e construa em equipe protótipos reais que levemos para produção para combater fraudes em escala.",
       "hero.btn.objetivos": "Ver Objetivos",
@@ -945,10 +1081,16 @@
       "cron.tl1.date": "20 de março, 2026",
       "cron.tl1.h3":   "🚀 Kick-off",
       "cron.tl1.desc": "Apresentação dos objetivos da hackathon e formação de equipes. O desafio começa oficialmente!",
+      "cron.tl2.date": "Semana de 23 de março, 2026",
       "cron.tl2.h3":   "⚙️ Set up",
       "cron.tl2.desc": "Realizar todas as configurações para poder usar o Claude e integrar com Slack, BQ e outras ferramentas que serão úteis na Hackathon.",
-      "cron.tl3.h3":   "🤝 Check ideas",
+      "cron.tleq.date":"Semana de 23 de março, 2026",
+      "cron.tleq.h3":  "👥 Definição de equipes",
+      "cron.tleq.desc":"As equipes serão definidas junto com a pessoa que as ajudará a guiá-las nas ideias que pensarem para levar adiante. Um grupo no Slack será criado quando estiver definido. Super importante pensar em um nome para a equipe!",
+      "cron.tl3.date": "Semana de 30 de março e 6 de abril",
+      "cron.tl3.h3":   "🧠 Brainstorming",
       "cron.tl3.desc": "Apresentação de ideias aos sponsors e debate sobre se estão no caminho certo ou se é preciso fazer modificações.",
+      "cron.tl4.date": "25 de março se confirma a data de início",
       "cron.tl4.h3":   "⚙️ Hackathon",
       "cron.tl4.desc": "Vamos lá! XX dias intensivos para construir o MVP ou protótipo. Foco total em execução, criatividade e impacto.",
       "cron.tl5.h3":   "🎤 Apresentação de Resultados",
@@ -964,7 +1106,7 @@
       "eq.tbd":        "A definir",
 
       "eval.title":       "🏆 Avaliação",
-      "eval.subtitle":    "4 eixos de avaliação: 2 requisitos obrigatórios e 2 critérios de pontuação adicionais.",
+      "eval.subtitle":    "5 eixos de avaliação: 2 requisitos obrigatórios e 3 critérios de pontuação adicionais.",
       "eval.must.label":  "⛔ Requisitos Obrigatórios (Must-Have)",
       "eval.e1.h3":       "Uso de ferramentas de IA",
       "eval.e1.desc":     "Integração efetiva do Claude Code, Fury ou outras ferramentas do ecossistema. Profundidade da implementação real e valor agregado justificado.",
@@ -975,6 +1117,8 @@
       "eval.e3.desc":     "Magnitude do impacto estimado. Clareza da métrica (mensal/anual) e realismo dos pressupostos utilizados.",
       "eval.e4.h3":       "Inovação",
       "eval.e4.desc":     "Diferenciação em relação às soluções atuais. Aplicação criativa da IA e abordagem disruptiva vs. incremental.",
+      "eval.e5.h3":       "Voto dos participantes",
+      "eval.e5.desc":     "Entre vocês vão escolher qual foi a melhor apresentação e ideia desenvolvida, e isso somará na decisão final.",
 
       "pres.title":   "🎤 Apresentação",
       "pres.subtitle":"Formato simples e direto: máximo 5 slides para comunicar o valor da sua solução.",
@@ -989,6 +1133,11 @@
       "pres.s3.desc": "Detalhe as próximas iterações, dependências técnicas e/ou organizacionais, e a visão de como essa solução chega à produção e escala.",
       "pres.limit":   "Máximo 5 slides.",
       "pres.limit2":  "Clareza e concisão acima de tudo.",
+
+      "premio.title":     "🏅 Prêmio ao Vencedor",
+      "premio.subtitle":  "Algo grande aguarda a equipe que se destacar. Os detalhes… ainda estão sob sigilo.",
+      "premio.card.h3":   "A definir",
+      "premio.card.desc": "O prêmio está sendo preparado com cuidado. Só podemos dizer que valerá cada linha de código, cada ideia e cada hora investida. A equipe vencedora levará algo que vai além do esperado.",
     }
   };
 
